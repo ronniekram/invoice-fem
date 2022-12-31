@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "services/api"
+    },
+    {
+      "path": "services/app"
+    },
+  ],
+  "settings": {
+    "prettier.configPath": "prettier.config.js",
+    "prettier.useTabs": false,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.autoClosingQuotes": "always",
+    "tailwindCSS.experimental.classRegex": [
+      "tw`([^`]*)", // tw`...`
+      "tw=\"([^\"]*)", // <div tw="..." />
+      "tw={\"([^\"}]*)", // <div tw={"..."} />
+      "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+      "tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+    ],
+    "tailwindCSS.includeLanguages": {
+      "typescript": "javascript",
+      "typescriptreact": "javascript"
+    }
+  }
+}
