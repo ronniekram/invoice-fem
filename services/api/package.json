@@ -17,14 +17,21 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "---- PRISMA ----": "echo ------------------------------------------",
+    "generate": "dotenv -c -e .env.development -e .env.development.local -v NODE_ENV=development -- npx prisma generate",
+    "migrate:dev": "dotenv -c -e .env.development -e .env.development.local -v NODE_ENV=development -- npx prisma migrate dev",
+    "db:reset": "dotenv -c -e .env.development -e .env.development.local -v NODE_ENV=development -- npx prisma migrate reset",
+    "db:seed": "dotenv -c -e .env.development -e .env.development.local -v NODE_ENV=development -- npx prisma db seed"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.2.1",
+    "@prisma/client": "^4.8.0",
     "app": "*",
+    "dotenv-cli": "^6.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
@@ -39,6 +46,8 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "dotenv": "^16.0.3",
+    "dotenv-flow": "^3.2.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",

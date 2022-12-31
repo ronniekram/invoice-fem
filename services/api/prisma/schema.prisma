@@ -1,11 +1,89 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+// <---------- MODELS ---------->
+model User {
+  id         Int       @id @default(autoincrement())
+  firstName  String    @map("first_name")
+  lastName   String    @map("last_name")
+  email      String    @unique
+  adress1    String
+  address2   String?
+  city       String
+  region     String?
+  country    String
+  postalCode String
+  clients    Client[]
+  invoices   Invoice[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Client {
+  id         Int       @id @default(autoincrement())
+  firstName  String    @map("first_name")
+  lastName   String    @map("last_name")
+  email      String    @unique
+  adress1    String
+  address2   String?
+  city       String
+  region     String?
+  country    String
+  postalCode String
+  biller     User      @relation(fields: [billerId], references: [id])
+  billerId   Int
+  invoices   Invoice[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("clients")
+}
+
+model Invoice {
+  id           Int        @id @default(autoincrement())
+  description  String
+  status       String
+  paymentDue   DateTime   @map("payment_due")
+  paymentTerms Int        @map("payment_terms")
+  totalDue     Int        @map("total_due")
+  client       Client     @relation(fields: [clientId], references: [id])
+  clientId     Int
+  biller       User       @relation(fields: [billerId], references: [id])
+  billerId     Int
+  items        LineItem[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("invoices")
+}
+
+model LineItem {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  quantity    Int
+  price       Int
+  total       Int
+  invoice     Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId   Int
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("line_items")
 }
