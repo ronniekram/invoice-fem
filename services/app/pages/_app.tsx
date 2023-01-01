@@ -6,27 +6,27 @@ import { useEffectOnce } from "react-use";
 import GlobalStyles from "../styles/global-styles";
 
 export default function App({ Component, pageProps }: AppProps) {
-  /** Prevents hydration error introduced by React 18. */
-  const [showChild, setShowChild] = useState<boolean>(false);
+	/** Prevents hydration error introduced by React 18. */
+	const [showChild, setShowChild] = useState<boolean>(false);
 
-  useEffectOnce(() => setShowChild(true));
+	useEffectOnce(() => setShowChild(true));
 
-  if (!showChild) {
-    return null;
-  }
+	if (!showChild) {
+		return null;
+	}
 
-  if (typeof window === `undefined`) {
-    return <></>;
-  }
+	if (typeof window === `undefined`) {
+		return <></>;
+	}
 
-  return (
-    <>
-      <Head>
-        <title>Next.js Template</title>
-      </Head>
+	return (
+		<>
+			<Head>
+				<title>Next.js Template</title>
+			</Head>
 
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </>
-  );
-};
+			<GlobalStyles />
+			<Component {...pageProps} />
+		</>
+	);
+}

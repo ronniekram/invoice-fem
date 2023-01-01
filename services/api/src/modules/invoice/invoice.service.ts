@@ -1,20 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
-import { Invoice, Prisma } from '@prisma/client';
+import { Injectable } from "@nestjs/common";
+import { Invoice, Prisma } from "@prisma/client";
+
+import { PrismaService } from "api/src/prisma.service";
 
 @Injectable()
 export class InvoiceService {
   constructor(private prisma: PrismaService) { }
 
-  async Invoice(
-    InvoiceWhereUniqueInput: Prisma.InvoiceWhereUniqueInput,
-  ): Promise<Invoice | null> {
+  async invoice(InvoiceWhereUniqueInput: Prisma.InvoiceWhereUniqueInput): Promise<Invoice | null> {
     return this.prisma.invoice.findUnique({
       where: InvoiceWhereUniqueInput,
     });
   }
 
-  async Invoices(params: {
+  async invoices(params: {
     skip?: number;
     take?: number;
     cursor?: Prisma.InvoiceWhereUniqueInput;

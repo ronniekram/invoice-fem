@@ -42,7 +42,7 @@ model Client {
   region     String?
   country    String
   postalCode String
-  biller     User      @relation(fields: [billerId], references: [id])
+  biller     User?     @relation(fields: [billerId], references: [id])
   billerId   Int
   invoices   Invoice[]
 
@@ -60,9 +60,9 @@ model Invoice {
   paymentDue   DateTime   @map("payment_due")
   paymentTerms Int        @map("payment_terms")
   totalDue     Int        @map("total_due")
-  client       Client     @relation(fields: [clientId], references: [id])
+  client       Client?    @relation(fields: [clientId], references: [id])
   clientId     Int
-  biller       User       @relation(fields: [billerId], references: [id])
+  biller       User?      @relation(fields: [billerId], references: [id])
   billerId     Int
   items        LineItem[]
 
@@ -73,13 +73,13 @@ model Invoice {
 }
 
 model LineItem {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
   quantity    Int
   price       Int
   total       Int
-  invoice     Invoice @relation(fields: [invoiceId], references: [id])
+  invoice     Invoice? @relation(fields: [invoiceId], references: [id])
   invoiceId   Int
 
   createdAt DateTime @default(now()) @map("created_at")
