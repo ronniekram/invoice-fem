@@ -5,7 +5,7 @@ import { LineItemService } from "./line-item.service";
 type LineItemInput = Omit<LineItem, "id" | "invoice" | "createdAt" | "updatedAt">
 
 @Controller()
-export class UserController {
+export class LineItemController {
   constructor(
     private readonly lineItemService: LineItemService,
   ) { }

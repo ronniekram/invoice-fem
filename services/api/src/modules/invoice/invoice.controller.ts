@@ -5,7 +5,7 @@ import { InvoiceService } from "./invoice.service";
 type InvoiceInput = Omit<Invoice, "id" | "biller" | "client" | "createdAt" | "updatedAt">
 
 @Controller()
-export class UserController {
+export class InvoiceController {
   constructor(
     private readonly invoiceService: InvoiceService,
   ) { }

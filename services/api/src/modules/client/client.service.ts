@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { Client, Prisma } from "@prisma/client";
 
-import { PrismaService } from "api/src/prisma.service";
+import { PrismaService } from "../../prisma.service";
+import { Client, Prisma } from "@prisma/client";
 
 @Injectable()
 export class ClientService {
   constructor(private prisma: PrismaService) { }
 
-  async client(ClientWhereUniqueInput: Prisma.ClientWhereUniqueInput): Promise<Client | null> {
+  async client(clientWhereUniqueInput: Prisma.ClientWhereUniqueInput): Promise<Client | null> {
     return this.prisma.client.findUnique({
-      where: ClientWhereUniqueInput,
+      where: clientWhereUniqueInput,
     });
   }
 

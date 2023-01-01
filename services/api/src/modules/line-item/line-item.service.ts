@@ -1,17 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import { LineItem, Prisma } from "@prisma/client";
 
-import { PrismaService } from "api/src/prisma.service";
+import { PrismaService } from "../../prisma.service";
 
 @Injectable()
 export class LineItemService {
   constructor(private prisma: PrismaService) { }
 
   async lineItem(
-    LineItemWhereUniqueInput: Prisma.LineItemWhereUniqueInput
+    lineItemWhereUniqueInput: Prisma.LineItemWhereUniqueInput
   ): Promise<LineItem | null> {
     return this.prisma.lineItem.findUnique({
-      where: LineItemWhereUniqueInput,
+      where: lineItemWhereUniqueInput,
     });
   }
 
